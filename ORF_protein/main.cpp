@@ -107,20 +107,38 @@ string translate(string gene, vector<codon> codeTable) {
 		s += gene[i - 2];
 		s += gene[i - 1];
 		s += gene[i - 0];
-		testFile << s << "\t";
+		//testFile << s << "\t";
 		for (int i = 0; i < codeTable.size(); i++) {
 			if (!codeTable[i].equal(s)) { continue; }
 			ptSeq += codeTable[i].amiName();
-			testFile << codeTable[i].code() << '\t' <<codeTable[i].amiName() << endl;
+			//testFile << codeTable[i].code() << '\t' <<codeTable[i].amiName() << endl;
 		}
 	}
 	return ptSeq;
+}
+
+string comp_strand(string seq) {
+	string s;
+
+
+	return s;
 }
 
 void set_ORFp(genome & g, vector<codon> codeTable) {
 	string seq = g.seq();
 	string ptSeq = translate(seq, codeTable);
 	g.insert_orfp(ptSeq);
+
+	seq.erase(seq.begin());
+	ptSeq = translate(seq, codeTable);
+	g.insert_orfp(ptSeq);
+
+	seq.erase(seq.begin());
+	ptSeq = translate(seq, codeTable);
+	g.insert_orfp(ptSeq);
+
+	seq = g.seq();
+	string cSeq = comp_strand(seq);
 }
 
 int main(void)
@@ -133,15 +151,39 @@ int main(void)
 	get_VL0(virusLib);
 
 	for (int i = 0; i < virusLib.size(); i++) {
-		testFile << virusLib[i].seq() << endl;
+		//testFile << virusLib[i].seq() << endl;
 		set_ORFp(virusLib[i], codeTable);
 		string s = virusLib[i].orfp(0);
+		/*
 		for (int i = 0; i < s.size(); i++) {
 			testFile << s[i] << "  ";
 		}
 		testFile << endl;
+		*/
+	}
+	
+	string p = virusLib[0].orfp(2);
+	string s = virusLib[0].seq();
+	ifstream stdFile;
+	stdFile.open("std.txt");
+	string buff;
+	string stdp;
+	while (getline(stdFile, buff)) {
+		for (int i = 0; i < buff.size(); i++) {
+			if ('A' <= buff.c_str()[i] && buff.c_str()[i] <= 'Z') { stdp += buff[i]; }
+			if ('*' == buff.c_str()[i]) { stdp += buff[i]; }
+ 		}
+ 		getline(stdFile, buff);
 	}
 
+	cout << stdp.size() << "\t" << p.size() << endl;
+
+	if (stdp == p) { cout << "right!\n"; }
+	if (stdp != p) {
+		for (int i = 0; i < stdp.size(); i++) {
+			if (stdp[i] != p[i]) { cout << "error ! " << stdp[i] << "\t" << p[i] << endl; }
+		}
+	}
 	testFile.close();
 	return 0;
 }
