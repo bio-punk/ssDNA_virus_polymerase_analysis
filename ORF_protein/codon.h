@@ -33,20 +33,12 @@ public: //amiName & set amiName
 	inline void setAmiName(const char c) { __amiName = c; }
 
 public:
-	inline bool equal(char str[4]) {
-		if ('\0' != str[3]) { return false; } //illegal input : IO error is 1x
-		if (__code[0] != str[0]) { return false; }
-		if (__code[1] != str[1]) { return false; }
-		if (__code[2] != str[1]) { return false; }
-		return true;
-	}
-
 	inline bool equal(string str) {
-		if ('\0' != str.c_str()[3]) { return false; }
+		string special = "AAT";
 		if (3 != str.size()) { return false; } //illegal input
 		if (__code[0] != str[0]) { return false; }
 		if (__code[1] != str[1]) { return false; }
-		if (__code[2] != str[1]) { return false; }
+		if (__code[2] != str[2]) { return false; }
 		return true;	
 	}
 

@@ -8,7 +8,7 @@
 #include <string>
 #include <set>
 
-#include "ssdna.h"
+#include "genome.h"
 //#include "amiacid.h"
 #include "codon.h"
 
@@ -57,7 +57,6 @@ int get_CT(vector<codon> & a) {
 				continue;
 			}
 		}
-		//printf("%c\n",amiName);
 	}
 	fclose(fp);
 	return 0;
@@ -72,7 +71,7 @@ string record_Name(string buff) {
 	return rt;
 }
 
-int get_VL0(vector<ssDNA> & v) {
+int get_VL0(vector<genome> & v) {
 	ifstream seqFile;
 	seqFile.open("seq.txt");
 	string buff;
@@ -80,7 +79,7 @@ int get_VL0(vector<ssDNA> & v) {
 	string seq;
 	while (getline(seqFile, buff)) {
 		if ('>' == buff.c_str()[0]) {		
-			ssDNA tmp;
+			genome tmp;
 			tmp.setName(name);
 			tmp.setSeq(seq);
 			v.push_back(tmp);
@@ -91,13 +90,37 @@ int get_VL0(vector<ssDNA> & v) {
 		}
 		seq+=buff;
 	}
-	ssDNA tmp;
+	genome tmp;
 	tmp.setName(name);
 	tmp.setSeq(seq);
 	v.push_back(tmp);
-
+	v.erase(v.begin());
 	seqFile.close();
 	return 0;
+}
+
+string translate(string gene, vector<codon> codeTable) {
+	string ptSeq;
+	for (int i = 2; i < gene.size(); i += 3) {
+		string s;
+		s.clear();
+		s += gene[i - 2];
+		s += gene[i - 1];
+		s += gene[i - 0];
+		testFile << s << "\t";
+		for (int i = 0; i < codeTable.size(); i++) {
+			if (!codeTable[i].equal(s)) { continue; }
+			ptSeq += codeTable[i].amiName();
+			testFile << codeTable[i].code() << '\t' <<codeTable[i].amiName() << endl;
+		}
+	}
+	return ptSeq;
+}
+
+void set_ORFp(genome & g, vector<codon> codeTable) {
+	string seq = g.seq();
+	string ptSeq = translate(seq, codeTable);
+	g.insert_orfp(ptSeq);
 }
 
 int main(void)
@@ -106,11 +129,18 @@ int main(void)
 	vector<codon> codeTable;
 	get_CT(codeTable);
 
-	vector<ssDNA> virusLib;
+	vector<genome> virusLib;
 	get_VL0(virusLib);
 
-	virusLib.erase(virusLib.begin());
-	for (int i = 0; i < virusLib.size(); i++) { testFile << virusLib[i].name() << endl; }
+	for (int i = 0; i < virusLib.size(); i++) {
+		testFile << virusLib[i].seq() << endl;
+		set_ORFp(virusLib[i], codeTable);
+		string s = virusLib[i].orfp(0);
+		for (int i = 0; i < s.size(); i++) {
+			testFile << s[i] << "  ";
+		}
+		testFile << endl;
+	}
 
 	testFile.close();
 	return 0;
