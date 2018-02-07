@@ -9,8 +9,8 @@
 #include <set>
 
 #include "genome.h"
-//#include "amiacid.h"
 #include "codon.h"
+#include "protein.h"
 
 #define MAX_STR 256
 
@@ -23,6 +23,8 @@ using std::array;
 using std::vector;
 using std::string;
 using std::set;
+
+static const int PROTEIN_MIN_LENGTH = 100;
 
 ofstream testFile;
 
@@ -117,28 +119,47 @@ string translate(string gene, vector<codon> codeTable) {
 	return ptSeq;
 }
 
-string comp_strand(string seq) {
-	string s;
-
-
-	return s;
-}
-
 void set_ORFp(genome & g, vector<codon> codeTable) {
 	string seq = g.seq();
 	string ptSeq = translate(seq, codeTable);
-	g.insert_orfp(ptSeq);
+	g.insert_orfp(ptSeq);//1
 
 	seq.erase(seq.begin());
 	ptSeq = translate(seq, codeTable);
-	g.insert_orfp(ptSeq);
+	g.insert_orfp(ptSeq);//2
 
 	seq.erase(seq.begin());
 	ptSeq = translate(seq, codeTable);
-	g.insert_orfp(ptSeq);
+	g.insert_orfp(ptSeq);//3
 
-	seq = g.seq();
-	string cSeq = comp_strand(seq);
+	string cSeq = g.compStrand();
+	ptSeq = translate(cSeq, codeTable);
+	g.insert_orfp(ptSeq);//4
+
+	cSeq.erase(cSeq.begin());
+	ptSeq = translate(cSeq, codeTable);
+	g.insert_orfp(ptSeq);//5
+
+	cSeq.erase(cSeq.begin());
+	ptSeq = translate(cSeq, codeTable);
+	g.insert_orfp(ptSeq);//6
+}
+
+void put_Protein(genome g) {
+	string name = g.name();
+	for (int i = 0; i < 6; i++) {
+		string orfp = g.orfp(i);
+		string proteinSeq;
+		for (int k = 0; k < orfp.size(); k++) {
+			if ('*' == orfp[k]) {
+				if (proteinSeq.size() <= PROTEIN_MIN_LENGTH) { proteinSeq.clear(); continue; }
+				testFile << ">" << name << " orf:" << i << endl << proteinSeq << endl;
+				proteinSeq.clear();
+				continue;
+			}
+			proteinSeq += orfp[k];
+		}
+	}
 }
 
 int main(void)
@@ -149,19 +170,22 @@ int main(void)
 
 	vector<genome> virusLib;
 	get_VL0(virusLib);
+	cout << "success read!" << endl;
+
+	//vector<protein> proteinLib;
 
 	for (int i = 0; i < virusLib.size(); i++) {
-		//testFile << virusLib[i].seq() << endl;
 		set_ORFp(virusLib[i], codeTable);
-		string s = virusLib[i].orfp(0);
-		/*
-		for (int i = 0; i < s.size(); i++) {
-			testFile << s[i] << "  ";
-		}
-		testFile << endl;
-		*/
+		put_Protein(virusLib[i]);
+		cout << "success calc virus:" << i + 1 << "/" << virusLib.size() << endl;
 	}
-	
+	/*
+	for (int i = 0; i < proteinLib.size(); i++) {
+		testFile << ">" << proteinLib[i].name() << " " << proteinLib[i].ORFIndex() << endl << proteinLib[i].seq() << endl;
+	}
+	*/
+
+	/*
 	string p = virusLib[0].orfp(2);
 	string s = virusLib[0].seq();
 	ifstream stdFile;
@@ -184,6 +208,7 @@ int main(void)
 			if (stdp[i] != p[i]) { cout << "error ! " << stdp[i] << "\t" << p[i] << endl; }
 		}
 	}
+	*/
 	testFile.close();
 	return 0;
 }
