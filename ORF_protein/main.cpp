@@ -24,7 +24,7 @@ using std::vector;
 using std::string;
 using std::set;
 
-static const int PROTEIN_MIN_LENGTH = 100;
+static const int PROTEIN_MIN_LENGTH = 60;
 
 ofstream testFile;
 
