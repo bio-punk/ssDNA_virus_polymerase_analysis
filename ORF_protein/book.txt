@@ -1,0 +1,49 @@
+编译命令：	c++ main.cpp -std=c++11 -o3 -o main.exe
+			c++ main.cpp -std=c++11 -o3 -o main.out
+
+执行：
+line01:	键盘输入输出文件名
+line02:	键盘输入氨基酸序列长度
+
+类：
+	genome : 基因组类
+	公有方法：
+		clear();			//重置
+		name();				//基因组的ncbi编号
+		seq();				//DNA序列
+		orfp(i);			//第i(1≤i≤6)条可能的orf翻译的蛋白
+		compStrand()		//互补链
+
+		setSeq(str);		//设置DNA序列为str
+		setName(str);		//设置name为str
+		insert_orfp(str)	//添加一条orfp
+
+	codon : 密码子表类
+		setCode();		//设置密码子
+		code();			//输出密码子
+		amiName();		//输出所编码的氨基酸
+		setAmiName();	//设置所编码的氨基酸
+		equal(str);		//判断密码子是否等于str
+		copy(obj);		//拷贝obj
+
+	protein	: 蛋白质类
+		seq();			//蛋白质序列
+		name();			//蛋白质所属物种的编号
+		ORFIndex();		//来自于第?条ORF
+
+		setSeq(str);	//设置蛋白质序列
+		setName(str);	//设置蛋白质所属物种编号
+		setORFIndex(x);	//设置蛋白质来自于第x条ORF
+
+main：
+	get_CT();
+	//得到密码子表，CT==codon table
+
+	get_VL0();
+	//得到全部病毒的DNA序列VL0 == virusLibrary
+
+	set_ORFp();
+	//计算某一病毒的全部ORFp
+
+	put_Protein();
+	//将某一病毒大于PROTEIN_MIN_LENGTH的氨基酸序列输出

@@ -24,9 +24,9 @@ using std::vector;
 using std::string;
 using std::set;
 
-static const int PROTEIN_MIN_LENGTH = 60;
+static int PROTEIN_MIN_LENGTH;
 
-ofstream testFile;
+ofstream outputFile;
 
 int get_CT(vector<codon> & a) {
 	FILE *fp;
@@ -109,11 +109,9 @@ string translate(string gene, vector<codon> codeTable) {
 		s += gene[i - 2];
 		s += gene[i - 1];
 		s += gene[i - 0];
-		//testFile << s << "\t";
 		for (int i = 0; i < codeTable.size(); i++) {
 			if (!codeTable[i].equal(s)) { continue; }
 			ptSeq += codeTable[i].amiName();
-			//testFile << codeTable[i].code() << '\t' <<codeTable[i].amiName() << endl;
 		}
 	}
 	return ptSeq;
@@ -153,7 +151,7 @@ void put_Protein(genome g) {
 		for (int k = 0; k < orfp.size(); k++) {
 			if ('*' == orfp[k]) {
 				if (proteinSeq.size() <= PROTEIN_MIN_LENGTH) { proteinSeq.clear(); continue; }
-				testFile << ">" << name << " orf:" << i << endl << proteinSeq << endl;
+				outputFile << ">" << name << " orf:" << i << endl << proteinSeq << endl;
 				proteinSeq.clear();
 				continue;
 			}
@@ -164,7 +162,14 @@ void put_Protein(genome g) {
 
 int main(void)
 {
-	testFile.open("test.txt");
+	string outputFileName;
+	cout << "output File:\t\t";
+	cin >> outputFileName;
+	cout << "PROTEIN MIN LENGTH(default:60):\t";
+	cin >> PROTEIN_MIN_LENGTH;
+	if (PROTEIN_MIN_LENGTH < 1) { PROTEIN_MIN_LENGTH = 60; }
+
+	outputFile.open(outputFileName);
 	vector<codon> codeTable;
 	get_CT(codeTable);
 
@@ -172,43 +177,12 @@ int main(void)
 	get_VL0(virusLib);
 	cout << "success read!" << endl;
 
-	//vector<protein> proteinLib;
-
 	for (int i = 0; i < virusLib.size(); i++) {
 		set_ORFp(virusLib[i], codeTable);
 		put_Protein(virusLib[i]);
 		cout << "success calc virus:" << i + 1 << "/" << virusLib.size() << endl;
 	}
-	/*
-	for (int i = 0; i < proteinLib.size(); i++) {
-		testFile << ">" << proteinLib[i].name() << " " << proteinLib[i].ORFIndex() << endl << proteinLib[i].seq() << endl;
-	}
-	*/
 
-	/*
-	string p = virusLib[0].orfp(2);
-	string s = virusLib[0].seq();
-	ifstream stdFile;
-	stdFile.open("std.txt");
-	string buff;
-	string stdp;
-	while (getline(stdFile, buff)) {
-		for (int i = 0; i < buff.size(); i++) {
-			if ('A' <= buff.c_str()[i] && buff.c_str()[i] <= 'Z') { stdp += buff[i]; }
-			if ('*' == buff.c_str()[i]) { stdp += buff[i]; }
- 		}
- 		getline(stdFile, buff);
-	}
-
-	cout << stdp.size() << "\t" << p.size() << endl;
-
-	if (stdp == p) { cout << "right!\n"; }
-	if (stdp != p) {
-		for (int i = 0; i < stdp.size(); i++) {
-			if (stdp[i] != p[i]) { cout << "error ! " << stdp[i] << "\t" << p[i] << endl; }
-		}
-	}
-	*/
-	testFile.close();
+	outputFile.close();
 	return 0;
 }

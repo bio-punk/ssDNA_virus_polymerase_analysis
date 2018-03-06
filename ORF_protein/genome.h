@@ -1,7 +1,7 @@
 using std::string;
 using std::vector;
 
-class SSDNA {
+class SSRNA {
 public:
 	virtual const string name() = 0;
 	virtual const string seq() = 0;
@@ -11,7 +11,7 @@ public:
 	virtual void setSeq(const string str) = 0;
 };
 
-class genome : public SSDNA {
+class genome : public SSRNA {
 private: //variable
 	string __name;
 	string __seq;

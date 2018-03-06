@@ -9,12 +9,14 @@ public: //code & set code
 		if ('\0' != str[3]) { return -11; } //illegal input : IO error is 1x
 		__code.clear();
 		for (int i = 0; i < 3; i++) { __code += str[i]; }
+		return 0;
 	}
 	
 	inline int setCode(string str) {
 		if ('\0' != str.c_str()[3]) { return -11; }
 		__code.clear();
 		__code = str;
+		return 0;
 	}
 	
 	inline void code(char str[4]) {
@@ -34,7 +36,7 @@ public: //amiName & set amiName
 
 public:
 	inline bool equal(string str) {
-		string special = "AAT";
+		//string special = "AAT";
 		if (3 != str.size()) { return false; } //illegal input
 		if (__code[0] != str[0]) { return false; }
 		if (__code[1] != str[1]) { return false; }
