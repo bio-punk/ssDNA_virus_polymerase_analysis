@@ -24,7 +24,11 @@ using std::vector;
 using std::string;
 using std::set;
 
+<<<<<<< HEAD
 static int PROTEIN_MIN_LENGTH;
+=======
+static int PROTEIN_MIN_LENGTH = 60;
+>>>>>>> 59ab06265572b371c58c533a9059d204dc55a17a
 
 ofstream outputFile;
 
@@ -162,6 +166,7 @@ void put_Protein(genome g) {
 
 int main(void)
 {
+<<<<<<< HEAD
 	string outputFileName;
 	cout << "output File:\t\t";
 	cin >> outputFileName;
@@ -170,6 +175,16 @@ int main(void)
 	if (PROTEIN_MIN_LENGTH < 1) { PROTEIN_MIN_LENGTH = 60; }
 
 	outputFile.open(outputFileName);
+=======
+	string output_file_name;
+	cout << "output file name: ";
+	cin >> output_file_name;
+
+	cout << "PROTEIN sequence minimum length: ";
+	cin >> PROTEIN_MIN_LENGTH;
+
+	outputFile.open(output_file_name);
+>>>>>>> 59ab06265572b371c58c533a9059d204dc55a17a
 	vector<codon> codeTable;
 	get_CT(codeTable);
 
@@ -182,7 +197,10 @@ int main(void)
 		put_Protein(virusLib[i]);
 		cout << "success calc virus:" << i + 1 << "/" << virusLib.size() << endl;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 59ab06265572b371c58c533a9059d204dc55a17a
 	outputFile.close();
 	return 0;
 }
