@@ -25,6 +25,7 @@ using std::string;
 using std::set;
 
 static int PROTEIN_MIN_LENGTH;
+static long long cnt = 0;
 
 ofstream outputFile;
 
@@ -151,7 +152,7 @@ void put_Protein(genome g) {
 		for (int k = 0; k < orfp.size(); k++) {
 			if ('*' == orfp[k]) {
 				if (proteinSeq.size() <= PROTEIN_MIN_LENGTH) { proteinSeq.clear(); continue; }
-				outputFile << ">" << name << " orf:" << i << endl << proteinSeq << endl;
+				outputFile << ">" << name << " orf:" << i << endl << proteinSeq << endl; cnt++;
 				proteinSeq.clear();
 				continue;
 			}
@@ -184,6 +185,14 @@ int main(void)
 		cout << "success calc virus:" << i + 1 << "/" << virusLib.size() << endl;
 	}
 
+	ofstream sizeFile;
+	sizeFile.open("size.txt");
+	sizeFile << cnt << endl;
+	
+	sizeFile.close();
 	outputFile.close();
+
+	system("pause");
+
 	return 0;
 }
