@@ -31,3 +31,4 @@
 *.out
 *.app
 ORF_protein/test.txt
+*.gz
