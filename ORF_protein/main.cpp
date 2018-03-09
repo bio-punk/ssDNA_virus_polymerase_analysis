@@ -152,7 +152,7 @@ void put_Protein(genome g) {
 		for (int k = 0; k < orfp.size(); k++) {
 			if ('*' == orfp[k]) {
 				if (proteinSeq.size() <= PROTEIN_MIN_LENGTH) { proteinSeq.clear(); continue; }
-				outputFile << ">" << name << " orf:" << i << endl << proteinSeq << endl; cnt++;
+				outputFile << ">" << name << "_orf:" << i << endl << proteinSeq << endl; cnt++;
 				proteinSeq.clear();
 				continue;
 			}

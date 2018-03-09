@@ -32,3 +32,8 @@
 *.app
 ORF_protein/test.txt
 *.gz
+del_ORF/uniref-all.fasta
+*.fasta
+*.fasta
+del_ORF/.DS_Store
+*.phr
