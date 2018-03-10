@@ -37,3 +37,8 @@ del_ORF/uniref-all.fasta
 *.fasta
 del_ORF/.DS_Store
 *.phr
+*.psq
+*.pin
+*.pog
+*.psi
+*.psd

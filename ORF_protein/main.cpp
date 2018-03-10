@@ -149,10 +149,11 @@ void put_Protein(genome g) {
 	for (int i = 0; i < 6; i++) {
 		string orfp = g.orfp(i);
 		string proteinSeq;
+		int cnt = 1;
 		for (int k = 0; k < orfp.size(); k++) {
 			if ('*' == orfp[k]) {
 				if (proteinSeq.size() <= PROTEIN_MIN_LENGTH) { proteinSeq.clear(); continue; }
-				outputFile << ">" << name << "_orf:" << i << endl << proteinSeq << endl; cnt++;
+				outputFile << ">" << name << "_orf:" << i << "_" << cnt++ << endl << proteinSeq << endl;
 				proteinSeq.clear();
 				continue;
 			}
@@ -164,7 +165,7 @@ void put_Protein(genome g) {
 int main(void)
 {
 	string outputFileName;
-	cout << "output File:\t\t";
+	cout << "output File:\t";
 	cin >> outputFileName;
 	cout << "PROTEIN MIN LENGTH(default:60):\t";
 	cin >> PROTEIN_MIN_LENGTH;
