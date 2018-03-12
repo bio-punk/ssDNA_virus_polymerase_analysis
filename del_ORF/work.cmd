@@ -1,5 +1,5 @@
 Echo %Date% %Time%
 
-Blastp -query input.fasta -out out.txt -db database -evalue 1e-5 -outfmt 6 -num_threads 4 -max_target_seqs 1
+Blastp -query out001.fasta -db database -outfmt 6 -out out.txt
 
 Echo %Date% %Time%

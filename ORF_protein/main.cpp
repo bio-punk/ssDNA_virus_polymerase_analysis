@@ -26,6 +26,9 @@ using std::set;
 
 static int PROTEIN_MIN_LENGTH;
 static long long cnt = 0;
+static int SEQ_NUM_GAP = 10000;
+string outputFileName;
+string outNum = "001";
 
 ofstream outputFile;
 
@@ -144,6 +147,12 @@ void set_ORFp(genome & g, vector<codon> codeTable) {
 	g.insert_orfp(ptSeq);//6
 }
 
+void inc(string & s) {
+	if (s[2] == '9' && s[1] == '9') { s[0]++; s[1] == '0'; s[2] == '0'; return; }
+	if (s[2] == '9') { s[1]++; s[2] = '0'; return; }
+	s[2]++;
+}
+
 void put_Protein(genome g) {
 	string name = g.name();
 	for (int i = 0; i < 6; i++) {
@@ -156,6 +165,17 @@ void put_Protein(genome g) {
 				outputFile << ">" << name << "_orf:" << i << "_" << protCnt++ << endl << proteinSeq << endl;
 				cnt++;
 				proteinSeq.clear();
+				if (cnt % 1000 != 0) { continue; }
+				inc(outNum);
+				//cout << cnt << endl;
+				//cout << outputFileName << endl;
+				outputFile.close();
+				outputFileName.erase(outputFileName.size() - 9, 9);
+				outputFileName += outNum;
+				outputFileName += ".fasta";
+				outputFile.open(outputFileName);
+				//cout << outputFileName << endl;
+				//system("pause");
 				continue;
 			}
 			proteinSeq += orfp[k];
@@ -165,14 +185,15 @@ void put_Protein(genome g) {
 
 int main(void)
 {
-	string outputFileName;
 	cout << "output File:\t";
 	cin >> outputFileName;
 	cout << "PROTEIN MIN LENGTH(default:60):\t";
 	cin >> PROTEIN_MIN_LENGTH;
+	cout << "how many seqs in a file?'t";
+	cin >> SEQ_NUM_GAP;
 	if (PROTEIN_MIN_LENGTH < 1) { PROTEIN_MIN_LENGTH = 60; }
 
-	outputFile.open(outputFileName);
+	//outputFile.open(outputFileName);
 
 	vector<codon> codeTable;
 	get_CT(codeTable);
@@ -180,6 +201,10 @@ int main(void)
 	vector<genome> virusLib;
 	get_VL0(virusLib);
 	cout << "success read!" << endl;
+	
+	outputFileName += outNum;
+	outputFileName += ".fasta";
+	outputFile.open(outputFileName);
 
 	for (int i = 0; i < virusLib.size(); i++) {
 		set_ORFp(virusLib[i], codeTable);
