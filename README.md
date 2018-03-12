@@ -1,4 +1,4 @@
-# ssDNA_virus_polymerase_analysis
+# ssRNA_virus_polymerase_analysis
 ssRNA病毒聚合酶多样性与进化分析
 第一步：找出ORF翻译出的氨基酸序列；
 第二步：删掉这些氨基酸中不是蛋白质的；
