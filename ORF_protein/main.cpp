@@ -149,11 +149,12 @@ void put_Protein(genome g) {
 	for (int i = 0; i < 6; i++) {
 		string orfp = g.orfp(i);
 		string proteinSeq;
-		int cnt = 1;
+		int protCnt = 1;
 		for (int k = 0; k < orfp.size(); k++) {
 			if ('*' == orfp[k]) {
 				if (proteinSeq.size() <= PROTEIN_MIN_LENGTH) { proteinSeq.clear(); continue; }
-				outputFile << ">" << name << "_orf:" << i << "_" << cnt++ << endl << proteinSeq << endl;
+				outputFile << ">" << name << "_orf:" << i << "_" << protCnt++ << endl << proteinSeq << endl;
+				cnt++;
 				proteinSeq.clear();
 				continue;
 			}
@@ -193,7 +194,7 @@ int main(void)
 	sizeFile.close();
 	outputFile.close();
 
-	system("pause");
+	//system("pause");
 
 	return 0;
 }
