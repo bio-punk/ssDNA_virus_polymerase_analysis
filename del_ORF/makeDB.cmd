@@ -1,1 +1,3 @@
-Makeblastdb -in uniref-all.fasta -dbtype prot -parse_seqids -out database
+Echo %Date% %Time%
+Makeblastdb -in uniref-all.fasta -dbtype prot -out database
+Echo %Date% %Time%
