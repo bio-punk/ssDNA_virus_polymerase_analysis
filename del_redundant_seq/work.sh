@@ -1,1 +1,1 @@
-cd-hit -i in.fasta -o delRDTseq.fasta -aL 0.7 -AL 5
+cd-hit -i in.fasta -o delRDTseq.fasta -c 0.5 -n 3
