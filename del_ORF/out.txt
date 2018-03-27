@@ -1,3 +1,7 @@
-NC_036636.1_orf:0_1	UniRef50_A0A0C4E9L1	28.358	67	45	1	18	84	50	113	0.48	37.0
-NC_036636.1_orf:0_1	UniRef50_A0A284RQX9	35.185	54	33	1	22	73	327	380	0.75	36.6
-NC_036636.1_orf:0_1	UniRef50_Q869L3	29.231	65	38	2	9	73	4608	4664	7.6	33.9
+# BLASTP 2.7.1+
+# Query: NC_036636.1_orf:2_1a
+# Database: psb
+# Fields: query acc.ver, subject acc.ver, % identity, alignment length, mismatches, gap opens, q. start, q. end, s. start, s. end, evalue, bit score
+# 1 hits found
+NC_036636.1_orf:2_1a	UniRef50_A0A0M4L956	72.727	88	24	0	15	102	1	88	3.77e-40	148
+# BLAST processed 1 queries
