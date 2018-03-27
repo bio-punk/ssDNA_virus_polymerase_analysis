@@ -18,6 +18,11 @@ int main(void)
 		cout << "echo `date +\"%Y/%m/%d-%H:%M:%S\"`" << endl;
 		inc(No);
 		cout 
+			<< "echo " 
+			<< No
+			<< " is working!"
+		<< endl;
+		cout 
 			<< "blastp -query input" 
 			<< No
 			<< ".fasta -outfmt 6 -evalue 1e-3 -db psb -num_threads 2 -max_target_seqs 10 -out out"
