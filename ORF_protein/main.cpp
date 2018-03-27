@@ -148,7 +148,7 @@ void set_ORFp(genome & g, vector<codon> codeTable) {
 }
 
 void inc(string & s) {
-	if (s[2] == '9' && s[1] == '9') { s[0]++; s[1] == '0'; s[2] == '0'; return; }
+	if (s[2] == '9' && s[1] == '9') { s[0]++; s[1] = '0'; s[2] = '0'; return; }
 	if (s[2] == '9') { s[1]++; s[2] = '0'; return; }
 	s[2]++;
 }
