@@ -1,0 +1,1 @@
+blastp -query base001.fasta -outfmt 6 -evalue 1e-3 -db psb -num_threads 2 -max_target_seqs 10 -out out.txt
