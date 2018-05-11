@@ -189,11 +189,9 @@ int main(void)
 	cin >> outputFileName;
 	cout << "PROTEIN MIN LENGTH(default:60):\t";
 	cin >> PROTEIN_MIN_LENGTH;
-	cout << "how many seqs in a file?'t";
+	cout << "how many seqs in a file?\t";
 	cin >> SEQ_NUM_GAP;
 	if (PROTEIN_MIN_LENGTH < 1) { PROTEIN_MIN_LENGTH = 60; }
-
-	//outputFile.open(outputFileName);
 
 	vector<codon> codeTable;
 	get_CT(codeTable);
@@ -218,8 +216,6 @@ int main(void)
 	
 	sizeFile.close();
 	outputFile.close();
-
-	//system("pause");
 
 	return 0;
 }
