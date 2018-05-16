@@ -1,0 +1,3 @@
+## Complete genomes: Dinornavirus (taxid 10239)
+"Genome"	"Accession"	"Source information"	"Number of segments"	"Genome length"	"Number of proteins"	"Genome Neighbors"	"Host"	"Date completed"	"Date updated"
+    Heterocapsa circularisquama RNA virus 01	NC_007518	isolate:HcRNAV34	-	4375 nt	2	1	algae	11/04/2005	12/08/2008	

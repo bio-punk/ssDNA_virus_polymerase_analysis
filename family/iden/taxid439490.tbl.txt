@@ -1,0 +1,14 @@
+## Complete genomes: unclassified ssRNA viruses (taxid 10239)
+"Genome"	"Accession"	"Source information"	"Number of segments"	"Genome length"	"Number of proteins"	"Genome Neighbors"	"Host"	"Date completed"	"Date updated"
+    Chaetoceros tenuissimus RNA virus type-II	NC_025889	isolate:SS10-16V	-	9562 nt	2	2	algae	12/11/2014	12/11/2014	
+    Fisavirus 1	NC_025836	strain:HAL1	-	8712 nt	1	-	vertebrates	12/10/2014	02/18/2015	
+    Pansavirus 1	NC_035183	strain:gppn001	-	8703 nt	1	-	vertebrates	07/14/2017	08/24/2017	
+    Pansavirus 2	NC_035182	strain:gppn002	-	8612 nt	1	-	vertebrates	07/14/2017	08/24/2017	
+Fusariviridae
+    Fusarium poae fusarivirus 1	NC_030868	-	-	6379 nt	2	-	fungi	09/09/2016	09/09/2016	
+    Nigrospora oryzae fusarivirus 1	NC_031960	isolate:HN-19	-	7018 nt	2	-	fungi	09/21/2017	09/21/2017	
+    Penicillium aurantiogriseum fusarivirus 1	NC_028467	-	-	6139 nt	2	-	fungi	12/03/2015	12/03/2015	
+    Penicillium roqueforti ssRNA mycovirus 1	NC_024699	strain:PRG42-7	-	6002 nt	2	-	fungi	11/06/2014	11/25/2014	
+    Pleospora typhicola fusarivirus 1	NC_028470	-	-	6733 nt	2	-	fungi	12/03/2015	12/03/2015	
+    Rosellinia necatrix fusarivirus 1	NC_024485	strain:NW10	-	6286 nt	2	-	fungi	07/24/2014	11/06/2014	
+    Sclerotinia sclerotiorum fusarivirus 1	NC_027208	strain:JMTJ14	-	7769 nt	4	-	fungi	06/10/2015	06/10/2015	
