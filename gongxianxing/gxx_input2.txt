@@ -1,0 +1,11 @@
+#sample	group
+invertebrates	invertebrates
+vertebrates	vertebrates
+plants	plants
+fungi	fungi
+algae	algae
+environment	environment
+unknown	unknown
+bacteria	bacteria
+protozoa	protozoa
+human	human
